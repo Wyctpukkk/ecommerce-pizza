@@ -1,8 +1,7 @@
 import React from 'react';
 
-const Sort = () => {
+const Sort = ({ selected, setSelected }) => {
   const [show, setShow] = React.useState(false);
-  const [selected, setSelected] = React.useState(0);
   const list = ['популярности', 'цене', 'алфавиту'];
 
   const onClickSelected = (id) => {

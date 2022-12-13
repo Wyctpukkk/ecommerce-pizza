@@ -1,8 +1,6 @@
 import React from 'react';
 
-const Categories = () => {
-  const [isActive, setIsActive] = React.useState(0);
-
+const Categories = ({ isActive, setIsActive }) => {
   const categories = [
     'Все',
     'Мясные',
