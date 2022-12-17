@@ -7,7 +7,7 @@ import { useContext } from 'react';
 import { ProductsSkeleton } from '../components/PizzaBlock/ProductsSkeleton';
 import { Products } from '../components/PizzaBlock/Products';
 
-export const Home = () => {
+export const Home = ({ handlePage }) => {
   const { searchText } = useContext(SearchPizza);
   const [pizzas, setPizzas] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(true);
@@ -18,7 +18,7 @@ export const Home = () => {
   React.useEffect(() => {
     setIsLoading(true);
     fetch(
-      `https://6395c5a790ac47c680731729.mockapi.io/pizzas?${
+      `https://6395c5a790ac47c680731729.mockapi.io/pizzas?page=${handlePage}&limit=4${
         category === 0 ? '' : '&category=' + category
       }${searchText ? '&search=' + searchText : ''}${'&sortBy=' + nameOfSorted}`
     )
@@ -28,7 +28,7 @@ export const Home = () => {
         setIsLoading(false);
       });
     window.scrollTo(0, 0);
-  }, [category, sort, nameOfSorted, searchText]);
+  }, [category, sort, nameOfSorted, searchText, handlePage]);
 
   return (
     <div className="container">

@@ -1,0 +1,21 @@
+.root {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+}
+.btn {
+  margin: 5px;
+  background-color: unset;
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  color: #fe5f1e;
+  border: 1px solid #fe5f1e;
+  font-size: 16px;
+
+  &:hover {
+    cursor: pointer;
+    color: white;
+    background-color: #fe5f1e;
+  }
+}
