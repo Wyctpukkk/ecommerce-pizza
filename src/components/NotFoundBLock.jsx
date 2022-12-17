@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './NotFoundBlock.module.scss';
 
-const NotFoundBLock = () => {
+export const NotFoundBLock = () => {
   return (
     <div>
       <div className={styles.smile}>😕</div>
@@ -12,5 +12,3 @@ const NotFoundBLock = () => {
     </div>
   );
 };
-
-export default NotFoundBLock;

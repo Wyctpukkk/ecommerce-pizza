@@ -1,21 +1,26 @@
 import React from 'react';
-import Categories from '../components/Categories';
-import Sort from '../components/Sort';
-import PizzaBlock from '../components/PizzaBlock/PizzaBlock';
-import Skeleton from '../components/PizzaBlock/Skeleton';
+import { useState } from 'react';
+import { Categories } from '../components/Categories';
+import { Sort } from '../components/Sort';
+import { SearchPizza } from '../App';
+import { useContext } from 'react';
+import { ProductsSkeleton } from '../components/PizzaBlock/ProductsSkeleton';
+import { Products } from '../components/PizzaBlock/Products';
 
-const Home = () => {
+export const Home = () => {
+  const { searchText } = useContext(SearchPizza);
   const [pizzas, setPizzas] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(true);
   const [category, setCategory] = React.useState(0);
-  const [sort, setSorted] = React.useState(0);
-  const [nameOfSorted, setNameOfSorted] = React.useState('rating');
+  const [sort, setSort] = React.useState(0);
+  const [nameOfSorted, setNameOfSorted] = useState('');
 
   React.useEffect(() => {
     setIsLoading(true);
     fetch(
-      'https://6395c5a790ac47c680731729.mockapi.io/pizzas?sortBy=' +
-        `${nameOfSorted}${category === 0 ? '' : '&category=' + category}`
+      `https://6395c5a790ac47c680731729.mockapi.io/pizzas?${
+        category === 0 ? '' : '&category=' + category
+      }${searchText ? '&search=' + searchText : ''}${'&sortBy=' + nameOfSorted}`
     )
       .then((res) => res.json())
       .then((arr) => {
@@ -23,35 +28,22 @@ const Home = () => {
         setIsLoading(false);
       });
     window.scrollTo(0, 0);
-
-    function changeSort(sort) {
-      if (sort === 0) {
-        setNameOfSorted('rating');
-      } else if (sort === 1) {
-        setNameOfSorted('price');
-      } else {
-        setNameOfSorted('title');
-      }
-    }
-    changeSort(sort);
-    console.log(sort);
-    console.log(nameOfSorted);
-  }, [category, sort, nameOfSorted]);
+  }, [category, sort, nameOfSorted, searchText]);
 
   return (
     <div className="container">
       <div className="content__top">
         <Categories isActive={category} setIsActive={setCategory} />
-        <Sort selected={sort} setSelected={setSorted} />
+        <Sort
+          selectedSort={sort}
+          setSelectedSort={setSort}
+          handleSetNameOfSorted={setNameOfSorted}
+        />
       </div>
       <h2 className="content__title">Все пиццы</h2>
       <div className="content__items">
-        {isLoading
-          ? [...new Array(6)].map((_, id) => <Skeleton key={id} />)
-          : pizzas.map((obj) => <PizzaBlock key={obj.id} {...obj} />)}
+        {isLoading ? <ProductsSkeleton /> : <Products pizzas={pizzas} />}
       </div>
     </div>
   );
 };
-
-export default Home;

@@ -1,8 +1,6 @@
 import React from 'react';
-import NotFoundBLock from '../components/NotFoundBLock';
+import { NotFoundBLock } from '../components/NotFoundBLock';
 
-const NotFound = () => {
+export const NotFound = () => {
   return <NotFoundBLock />;
 };
-
-export default NotFound;

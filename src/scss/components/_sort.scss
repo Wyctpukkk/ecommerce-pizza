@@ -14,7 +14,9 @@
       margin-right: 8px;
     }
 
-    span {
+    button {
+      background-color: unset;
+      border: 0px;
       color: $orange;
       border-bottom: 1px dashed $orange;
       cursor: pointer;
@@ -34,9 +36,13 @@
 
     ul {
       overflow: hidden;
-      li {
+
+      button {
+        width: 100%;
+        border: 0px;
         padding: 12px 20px;
         cursor: pointer;
+        background-color: unset;
 
         &.active,
         &:hover {

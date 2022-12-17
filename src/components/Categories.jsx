@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Categories = ({ isActive, setIsActive }) => {
+export const Categories = ({ isActive, setIsActive }) => {
   const categories = [
     'Все',
     'Мясные',
@@ -17,20 +17,20 @@ const Categories = ({ isActive, setIsActive }) => {
   return (
     <div className="categories">
       <ul>
-        {categories.map((name, index) => {
-          return (
-            <li
-              key={index}
-              onClick={() => chooseIsActive(index)}
-              className={isActive === index ? 'active' : ''}
-            >
-              {name}
-            </li>
-          );
-        })}
+        <li>
+          {categories.map((name, index) => {
+            return (
+              <button
+                key={index}
+                onClick={() => chooseIsActive(index)}
+                className={isActive === index ? 'active' : ''}
+              >
+                {name}
+              </button>
+            );
+          })}
+        </li>
       </ul>
     </div>
   );
 };
-
-export default Categories;
