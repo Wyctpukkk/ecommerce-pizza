@@ -6,7 +6,7 @@ export const Pagination = ({ handlePage, handleSetPage }) => {
     <div className={styles.root}>
       <button
         className={styles.btn}
-        onClick={() => handleSetPage(handlePage === 1 ? '1' : handlePage - 1)}
+        onClick={() => handleSetPage(handlePage === 1 ? '3' : handlePage - 1)}
       >
         {'<'}
       </button>
@@ -21,7 +21,7 @@ export const Pagination = ({ handlePage, handleSetPage }) => {
       </button>
       <button
         className={styles.btn}
-        onClick={() => handleSetPage(handlePage === 3 ? '3' : handlePage + 1)}
+        onClick={() => handleSetPage(handlePage === 3 ? '1' : handlePage + 1)}
       >
         {'>'}
       </button>

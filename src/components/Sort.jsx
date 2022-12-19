@@ -1,24 +1,20 @@
 import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { setSort } from '../redux/slices/filterSlice';
 
-export const Sort = ({
-  selectedSort,
-  setSelectedSort,
-  handleSetNameOfSorted,
-}) => {
+export const Sort = () => {
+  const dispatch = useDispatch(setSort());
+  const sort = useSelector((state) => state.filter.sort);
   const [showSortMenu, setShowSortMenu] = React.useState(false);
-
-  const list = ['популярности', 'цене', 'алфавиту'];
+  const list = [
+    { name: 'популярности', sortProperty: 'rating' },
+    { name: 'цене', sortProperty: 'price' },
+    { name: 'названию', sortProperty: 'title' },
+  ];
 
   const onClickSelected = (id) => {
-    if (id === 0) {
-      handleSetNameOfSorted('rating');
-    } else if (id === 1) {
-      handleSetNameOfSorted('price');
-    } else {
-      handleSetNameOfSorted('title');
-    }
-    setSelectedSort(id);
-    setShowSortMenu(!showSortMenu);
+    setShowSortMenu(false);
+    console.log(dispatch(setSort(list[id])));
   };
 
   return (
@@ -27,7 +23,7 @@ export const Sort = ({
         <b>Сортировка по:</b>
         <span>
           <button onClick={() => setShowSortMenu(!showSortMenu)}>
-            {list[selectedSort]}
+            {sort.name}
           </button>
         </span>
       </div>
@@ -36,15 +32,14 @@ export const Sort = ({
           <ul>
             {list.map((value, id) => {
               return (
-                <li>
+                <li key={id}>
                   <button
-                    key={id}
                     onClick={() => {
                       onClickSelected(id);
                     }}
-                    className={selectedSort === id ? 'active' : ''}
+                    // className={selectedSort === id ? 'active' : ''}
                   >
-                    {value}
+                    {value.name}
                   </button>
                 </li>
               );
