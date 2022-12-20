@@ -14,7 +14,7 @@ export const Sort = () => {
 
   const onClickSelected = (id) => {
     setShowSortMenu(false);
-    console.log(dispatch(setSort(list[id])));
+    dispatch(setSort(list[id]));
   };
 
   return (
@@ -37,7 +37,7 @@ export const Sort = () => {
                     onClick={() => {
                       onClickSelected(id);
                     }}
-                    // className={selectedSort === id ? 'active' : ''}
+                    className={value.id === sort.id ? 'active' : ''}
                   >
                     {value.name}
                   </button>

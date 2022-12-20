@@ -1,5 +1,6 @@
 import React from 'react';
-import { useState } from 'react';
+import axios from 'axios';
+import { useState, useEffect } from 'react';
 import { Categories } from '../components/Categories';
 import { Sort } from '../components/Sort';
 import { SearchPizza } from '../App';
@@ -8,33 +9,35 @@ import { ProductsSkeleton } from '../components/PizzaBlock/ProductsSkeleton';
 import { Products } from '../components/PizzaBlock/Products';
 import { useSelector, useDispatch } from 'react-redux';
 import { setCategory } from '../redux/slices/filterSlice';
+import { Pagination } from '../components/Pagination/Pagination';
 
-export const Home = ({ handlePage }) => {
+export const Home = () => {
   const { searchText } = useContext(SearchPizza);
   const [pizzas, setPizzas] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const category = useSelector((state) => state.filter.category);
   const sort = useSelector((state) => state.filter.sort.sortProperty);
+  const page = useSelector((state) => state.pagination.page);
   const dispatch = useDispatch(setCategory());
 
   function setIsActive(id) {
     dispatch(setCategory(id));
   }
 
-  React.useEffect(() => {
+  useEffect(() => {
     setIsLoading(true);
-    fetch(
-      `https://6395c5a790ac47c680731729.mockapi.io/pizzas?page=${handlePage}&limit=4${
-        category === 0 ? '' : '&category=' + category
-      }${searchText ? '&search=' + searchText : ''}${'&sortBy=' + sort}`
-    )
-      .then((res) => res.json())
-      .then((arr) => {
-        setPizzas(arr);
+    axios
+      .get(
+        `https://6395c5a790ac47c680731729.mockapi.io/pizzas?page=${page}&limit=4${
+          category === 0 ? '' : '&category=' + category
+        }${searchText ? '&search=' + searchText : ''}${'&sortBy=' + sort}`
+      )
+      .then((res) => {
+        setPizzas(res.data);
         setIsLoading(false);
       });
     window.scrollTo(0, 0);
-  }, [category, searchText, handlePage, sort]);
+  }, [category, searchText, page, sort]);
 
   return (
     <div className="container">
@@ -46,6 +49,7 @@ export const Home = ({ handlePage }) => {
       <div className="content__items">
         {isLoading ? <ProductsSkeleton /> : <Products pizzas={pizzas} />}
       </div>
+      <Pagination />
     </div>
   );
 };
