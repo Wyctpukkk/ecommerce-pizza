@@ -37,7 +37,7 @@ export const Sort = () => {
                     onClick={() => {
                       onClickSelected(id);
                     }}
-                    className={value.id === sort.id ? 'active' : ''}
+                    // className={value.id === sort.id ? 'active' : ''}
                   >
                     {value.name}
                   </button>

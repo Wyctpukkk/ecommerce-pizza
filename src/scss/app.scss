@@ -99,18 +99,6 @@ body {
     display: flex;
     align-items: center;
     font-size: 32px;
-
-    svg {
-      position: relative;
-      top: -2px;
-      width: 30px;
-      height: 30px;
-      margin-right: 10px;
-      path {
-        stroke: $black;
-        stroke-width: 1.9;
-      }
-    }
   }
 
   &__clear {
@@ -127,17 +115,7 @@ body {
     }
 
     span,
-    svg,
-    path {
-      transition: all $duration ease-in-out;
-    }
-
     &:hover {
-      svg {
-        path {
-          stroke: darken($color: #b6b6b6, $amount: 50);
-        }
-      }
       span {
         color: darken($color: #b6b6b6, $amount: 50);
       }
@@ -192,14 +170,6 @@ body {
       justify-content: space-between;
       width: 13%;
 
-      &-minus {
-        svg {
-          path:first-of-type {
-            display: none;
-          }
-        }
-      }
-
       b {
         font-size: 22px;
       }
@@ -226,27 +196,7 @@ body {
 
       .button {
         border-color: darken($color: $gray-line, $amount: 10);
-      }
-
-      svg {
-        transform: rotate(45deg);
-
-        path {
-          fill: darken($color: $gray-line, $amount: 15);
-        }
-      }
-
-      .button {
-        svg {
-          width: 11.5px;
-          height: 11.5px;
-          position: relative;
-        }
-        &:hover,
-        &:active {
-          border-color: darken($color: $gray-line, $amount: 80);
-          background-color: darken($color: $gray-line, $amount: 80);
-        }
+        color: darken($color: $gray-line, $amount: 10);
       }
     }
   }
@@ -294,14 +244,6 @@ body {
 
           span {
             color: $gray-line;
-          }
-        }
-
-        svg {
-          margin-right: 12px;
-          path {
-            fill: transparent;
-            stroke-width: 2;
           }
         }
       }

@@ -28,7 +28,7 @@ export const Home = () => {
     setIsLoading(true);
     axios
       .get(
-        `https://6395c5a790ac47c680731729.mockapi.io/pizzas?page=${page}&limit=4${
+        `https://6395c5a790ac47c680731729.mockapi.io/pizzas?page=${page}&limit=2${
           category === 0 ? '' : '&category=' + category
         }${searchText ? '&search=' + searchText : ''}${'&sortBy=' + sort}`
       )

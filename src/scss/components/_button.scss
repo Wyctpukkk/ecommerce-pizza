@@ -20,8 +20,7 @@
 
   i,
   span,
-  path,
-  svg {
+  path {
     transition: all $duration ease-in-out;
   }
 
@@ -53,19 +52,22 @@
       background-color: lighten($color: $black, $amount: 10);
     }
   }
+  &--remove {
+    background-color: #fff;
+    top: 26px;
+    font-size: 22px;
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.4);
+    }
+  }
 
   &--outline {
     background-color: #fff;
+    font-size: 22px;
     border-color: $orange;
     &,
     span {
       color: $orange;
-    }
-
-    svg {
-      path {
-        fill: $orange;
-      }
     }
 
     &:hover {
@@ -74,12 +76,6 @@
       &,
       span {
         color: #fff;
-      }
-
-      svg {
-        path {
-          fill: #fff;
-        }
       }
     }
 
@@ -97,10 +93,6 @@
   }
 
   &--add {
-    svg {
-      margin-right: 2px;
-    }
-
     span {
       font-weight: 600;
       font-size: 16px;
@@ -136,14 +128,17 @@
     line-height: 23px;
     padding: 12px 25px;
 
-    svg {
-      margin-right: 8px;
-      margin-bottom: 1px;
-    }
-
     span {
       font-weight: 600;
       font-size: 16px;
     }
+  }
+}
+
+.clearCart {
+  border: 0px solid black;
+  background-color: unset;
+  &:hover {
+    cursor: pointer;
   }
 }

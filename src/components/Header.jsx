@@ -3,8 +3,13 @@ import LogoSvg from '../assets/img/pizza-logo.svg';
 import { Link } from 'react-router-dom';
 import { Search } from './Search/Search';
 import BasketSvg from '../assets/img/basket.svg';
+import { useSelector } from 'react-redux';
 
 export const Header = () => {
+  const lengthMassive = useSelector((state) => state.cartPizza.massiveOfPizzas);
+  const totalPrice = useSelector((state) => state.cartPizza.totalPrice);
+  const countCart = lengthMassive.length;
+
   return (
     <div className="header">
       <div className="container">
@@ -20,10 +25,10 @@ export const Header = () => {
         <Search />
         <div className="header__cart">
           <Link to="/cart" className="button button--cart">
-            <span>520 ₽</span>
+            <span>{totalPrice} р.</span>
             <div className="button__delimiter"></div>
             <img width="25" src={BasketSvg} alt="basket logo" />
-            <span>3</span>
+            <span>{countCart}</span>
           </Link>
         </div>
       </div>
