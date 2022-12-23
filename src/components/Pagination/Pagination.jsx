@@ -12,7 +12,7 @@ export const Pagination = () => {
     <div className={styles.root}>
       <button
         className={styles.btn}
-        onClick={() => dispatch(setPage(page === 1 ? '3' : page - 1))}
+        onClick={() => dispatch(setPage(page === 1 ? 3 : page - 1))}
       >
         {'<'}
       </button>
@@ -20,7 +20,7 @@ export const Pagination = () => {
         return (
           <button
             key={id}
-            className={styles.btn}
+            className={page === value ? styles.btn_active : styles.btn}
             onClick={() => dispatch(setPage(value))}
           >
             {value}
@@ -30,7 +30,7 @@ export const Pagination = () => {
 
       <button
         className={styles.btn}
-        onClick={() => dispatch(setPage(page === 3 ? '1' : page + 1))}
+        onClick={() => dispatch(setPage(page === 3 ? 1 : page + 1))}
       >
         {'>'}
       </button>

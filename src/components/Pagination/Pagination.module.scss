@@ -20,6 +20,15 @@
   }
 }
 .btn_active {
+  margin: 5px;
+
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+
+  border: 1px solid #fe5f1e;
+  font-size: 16px;
+
   color: white;
   background-color: #fe5f1e;
 }

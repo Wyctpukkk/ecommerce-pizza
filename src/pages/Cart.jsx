@@ -2,15 +2,14 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import BasketBlack from '../assets/img/basket black.svg';
 import { useSelector, useDispatch } from 'react-redux';
-import { clearCart, removePizza } from '../redux/slices/cartSlice';
+import { addPizza, clearCart, removePizza } from '../redux/slices/cartSlice';
 import trashSvg from '../assets/img/trash.svg';
 
 export const Cart = () => {
   const dispatch = useDispatch();
   const pizza = useSelector((state) => state.cartPizza.massiveOfPizzas);
-  const lengthMassive = useSelector((state) => state.cartPizza.massiveOfPizzas);
-  const countCart = lengthMassive.length;
   const totalPrice = useSelector((state) => state.cartPizza.totalPrice);
+  const countCart = useSelector((state) => state.cartPizza.totalPizzas);
 
   function nameType(name) {
     if (name === 1) {
@@ -66,8 +65,11 @@ export const Cart = () => {
                   <button className="button button--outline button--circle cart__item-count-minus">
                     -
                   </button>
-                  <b>{pizza.lenght}</b>
-                  <button className="button button--outline button--circle cart__item-count-plus">
+                  <b>{obj.count}</b>
+                  <button
+                    onClick={() => dispatch(addPizza(obj))}
+                    className="button button--outline button--circle cart__item-count-plus"
+                  >
                     +
                   </button>
                 </div>

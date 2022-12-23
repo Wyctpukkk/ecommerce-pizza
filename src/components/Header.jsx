@@ -6,9 +6,8 @@ import BasketSvg from '../assets/img/basket.svg';
 import { useSelector } from 'react-redux';
 
 export const Header = () => {
-  const lengthMassive = useSelector((state) => state.cartPizza.massiveOfPizzas);
   const totalPrice = useSelector((state) => state.cartPizza.totalPrice);
-  const countCart = lengthMassive.length;
+  const countCart = useSelector((state) => state.cartPizza.totalPizzas);
 
   return (
     <div className="header">
