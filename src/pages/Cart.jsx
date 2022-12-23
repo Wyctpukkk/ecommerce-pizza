@@ -2,7 +2,12 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import BasketBlack from '../assets/img/basket black.svg';
 import { useSelector, useDispatch } from 'react-redux';
-import { addPizza, clearCart, removePizza } from '../redux/slices/cartSlice';
+import {
+  addPizza,
+  clearCart,
+  removePizza,
+  removeOnePizza,
+} from '../redux/slices/cartSlice';
 import trashSvg from '../assets/img/trash.svg';
 
 export const Cart = () => {
@@ -10,6 +15,8 @@ export const Cart = () => {
   const pizza = useSelector((state) => state.cartPizza.massiveOfPizzas);
   const totalPrice = useSelector((state) => state.cartPizza.totalPrice);
   const countCart = useSelector((state) => state.cartPizza.totalPizzas);
+
+  console.log(pizza);
 
   function nameType(name) {
     if (name === 1) {
@@ -62,7 +69,10 @@ export const Cart = () => {
                   </p>
                 </div>
                 <div className="cart__item-count">
-                  <button className="button button--outline button--circle cart__item-count-minus">
+                  <button
+                    onClick={() => dispatch(removeOnePizza(obj))}
+                    className="button button--outline button--circle cart__item-count-minus"
+                  >
                     -
                   </button>
                   <b>{obj.count}</b>
@@ -78,7 +88,7 @@ export const Cart = () => {
                 </div>
                 <div className="cart__item-remove">
                   <button
-                    onClick={() => dispatch(removePizza(obj.id))}
+                    onClick={() => dispatch(removePizza(obj))}
                     className="button button--remove button--circle"
                   >
                     x
@@ -88,36 +98,6 @@ export const Cart = () => {
             </div>
           );
         })}
-        <div className="content__items">
-          {/* <div className="cart__item">
-            <div className="cart__item-img">
-              <img
-                className="pizza-block__image"
-                src="https://dodopizza-a.akamaihd.net/static/Img/Products/Pizza/ru-RU/b750f576-4a83-48e6-a283-5a8efb68c35d.jpg"
-                alt="Pizza"
-              />
-            </div>
-            <div className="cart__item-info">
-              <h3>{title}</h3>
-              <p>{activeType},{activeSize}</p>
-            </div>
-            <div className="cart__item-count">
-              <button className="button button--outline button--circle cart__item-count-minus">
-                -
-              </button>
-              <b>{massiveOfPizzas.lenght}</b>
-              <button className="button button--outline button--circle cart__item-count-plus">
-                +
-              </button>
-            </div>
-            <div className="cart__item-price"><b>{totalPrise}</b></div>
-            <div className="cart__item-remove">
-              <button className="button button--remove button--circle">
-                x
-              </button>
-            </div>
-          </div> */}
-        </div>
         <div className="cart__bottom">
           <div className="cart__bottom-details">
             <span>

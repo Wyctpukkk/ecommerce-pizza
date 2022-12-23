@@ -1,14 +1,11 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { addPizza } from '../../redux/slices/cartSlice';
 
 export const PizzaBlock = ({ id, price, title, imageUrl, sizes, types }) => {
   const [activeType, setActiveType] = React.useState(0);
   const [activeSize, setActiveSize] = React.useState(0);
   const dispatch = useDispatch();
-  const arrayPizzas = useSelector((state) => state.cartPizza.massiveOfPizzas);
-
-  console.log(arrayPizzas);
 
   return (
     <div className="pizza-block-wrapper">
