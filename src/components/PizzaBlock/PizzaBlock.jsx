@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { addPizza } from '../../redux/slices/cartSlice';
+import { addHomePizza } from '../../redux/slices/cartSlice';
 
 export const PizzaBlock = ({ id, price, title, imageUrl, sizes, types }) => {
   const [activeType, setActiveType] = React.useState(0);
@@ -45,7 +45,7 @@ export const PizzaBlock = ({ id, price, title, imageUrl, sizes, types }) => {
           <button
             onClick={() =>
               dispatch(
-                addPizza({
+                addHomePizza({
                   id,
                   price,
                   title,

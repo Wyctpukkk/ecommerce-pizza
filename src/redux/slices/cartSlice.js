@@ -10,22 +10,34 @@ export const cartSlice = createSlice({
   name: 'cart',
   initialState,
   reducers: {
-    addPizza(state, action) {
+    addHomePizza(state, action) {
       const findItem = state.massiveOfPizzas.find(
         (obj) => obj.id === action.payload.id
       );
-      state.totalPrice = state.totalPrice + action.payload.price;
       state.totalPizzas = state.totalPizzas + 1;
       if (findItem) {
-        findItem.count++;
         findItem.price = findItem.price + action.payload.price;
+        state.totalPrice = state.totalPrice + action.payload.price;
+        findItem.count++;
       } else {
+        state.totalPrice = state.totalPrice + action.payload.price;
         state.massiveOfPizzas.push({
           ...action.payload,
           count: 1,
         });
       }
     },
+    addCartPizza(state, action) {
+      const findItem = state.massiveOfPizzas.find(
+        (obj) => obj.id === action.payload.id
+      );
+      state.totalPizzas = state.totalPizzas + 1;
+      findItem.price = findItem.price + action.payload.price / findItem.count;
+      state.totalPrice =
+        state.totalPrice + action.payload.price / findItem.count;
+      findItem.count++;
+    },
+
     removePizza(state, action) {
       state.totalPizzas = state.totalPizzas - action.payload.count;
       state.totalPrice = state.totalPrice - action.payload.price;
@@ -60,7 +72,12 @@ export const cartSlice = createSlice({
   },
 });
 
-export const { addPizza, removePizza, removeOnePizza, clearCart } =
-  cartSlice.actions;
+export const {
+  addHomePizza,
+  addCartPizza,
+  removePizza,
+  removeOnePizza,
+  clearCart,
+} = cartSlice.actions;
 
 export default cartSlice.reducer;

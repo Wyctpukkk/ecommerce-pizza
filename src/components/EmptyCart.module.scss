@@ -1,0 +1,22 @@
+.iconCart {
+  position: relative;
+  padding: 100px;
+  @media (max-width: 900px) {
+    transform: scale(0.8);
+    left: -30px;
+  }
+  @media (max-width: 450px) {
+    transform: scale(0.4);
+    left: -220px;
+  }
+}
+h2 {
+  justify-content: center;
+  display: flex;
+}
+.contentEmptyCart {
+  position: relative;
+  left: auto;
+  background-color: grey;
+  margin-top: -70px;
+}
