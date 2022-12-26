@@ -35,8 +35,6 @@ export const Cart = () => {
     }
   }
 
-  console.log(pizza);
-
   return (
     <div className="container container--cart">
       {pizza.length === 0 ? (

@@ -1,10 +1,11 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addHomePizza } from '../../redux/slices/cartSlice';
 
 export const PizzaBlock = ({ id, price, title, imageUrl, sizes, types }) => {
   const [activeType, setActiveType] = React.useState(0);
   const [activeSize, setActiveSize] = React.useState(0);
+  const pizza = useSelector((state) => state.cartPizza.massiveOfPizzas);
   const dispatch = useDispatch();
 
   return (
@@ -58,7 +59,16 @@ export const PizzaBlock = ({ id, price, title, imageUrl, sizes, types }) => {
             className="button button--outline button--add"
           >
             <span>Добавить</span>
-            {/* {arrayPizzas > 0 && <i>{countCart}</i>} */}
+            {pizza.find((obj) => obj.id === id) ? (
+              <i>
+                {pizza
+                  .filter((obj) => obj.id === id)
+                  .map((value) => value.count)
+                  .reduce((sum, n) => sum + n)}
+              </i>
+            ) : (
+              ''
+            )}
           </button>
         </div>
       </div>

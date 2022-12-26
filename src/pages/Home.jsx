@@ -45,11 +45,21 @@ export const Home = () => {
         <Categories isActive={category} setIsActive={setIsActive} />
         <Sort />
       </div>
-      <h2 className="content__title">Все пиццы</h2>
-      <div className="content__items">
-        {isLoading ? <ProductsSkeleton /> : <Products pizzas={pizzas} />}
-      </div>
-      <Pagination />
+      {isLoading ? (
+        <ProductsSkeleton />
+      ) : pizzas.length === 0 ? (
+        <h2 className="wrong_input">
+          Пицца не найдена, возможно вы ошиблись попробуйте снова.
+        </h2>
+      ) : (
+        <>
+          <h2 className="content__title">Все пиццы</h2>
+          <div className="content__items">
+            <Products pizzas={pizzas} />
+          </div>
+          <Pagination />
+        </>
+      )}
     </div>
   );
 };

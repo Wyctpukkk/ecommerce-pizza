@@ -12,7 +12,10 @@ export const cartSlice = createSlice({
   reducers: {
     addHomePizza(state, action) {
       const findItem = state.massiveOfPizzas.find(
-        (obj) => obj.id === action.payload.id
+        (obj) =>
+          obj.id === action.payload.id &&
+          obj.activeSize === action.payload.activeSize &&
+          obj.activeType === action.payload.activeType
       );
       state.totalPizzas = state.totalPizzas + 1;
       if (findItem) {
@@ -29,7 +32,10 @@ export const cartSlice = createSlice({
     },
     addCartPizza(state, action) {
       const findItem = state.massiveOfPizzas.find(
-        (obj) => obj.id === action.payload.id
+        (obj) =>
+          obj.id === action.payload.id &&
+          obj.activeSize === action.payload.activeSize &&
+          obj.activeType === action.payload.activeType
       );
       state.totalPizzas = state.totalPizzas + 1;
       findItem.price = findItem.price + action.payload.price / findItem.count;
@@ -42,12 +48,18 @@ export const cartSlice = createSlice({
       state.totalPizzas = state.totalPizzas - action.payload.count;
       state.totalPrice = state.totalPrice - action.payload.price;
       state.massiveOfPizzas = state.massiveOfPizzas.filter(
-        (obj) => obj.id !== action.payload.id
+        (obj) =>
+          obj.id !== action.payload.id ||
+          obj.activeSize !== action.payload.activeSize ||
+          obj.activeType !== action.payload.activeType
       );
     },
     removeOnePizza(state, action) {
       const findItem = state.massiveOfPizzas.find(
-        (obj) => obj.id === action.payload.id
+        (obj) =>
+          obj.id === action.payload.id &&
+          obj.activeSize === action.payload.activeSize &&
+          obj.activeType === action.payload.activeType
       );
       if (findItem.count > 1) {
         findItem.price = findItem.price - action.payload.price / findItem.count;
@@ -60,7 +72,10 @@ export const cartSlice = createSlice({
         state.totalPizzas = state.totalPizzas - action.payload.count;
         state.totalPrice = state.totalPrice - action.payload.price;
         state.massiveOfPizzas = state.massiveOfPizzas.filter(
-          (obj) => obj.id !== action.payload.id
+          (obj) =>
+            obj.id !== action.payload.id ||
+            obj.activeSize !== action.payload.activeSize ||
+            obj.activeType !== action.payload.activeType
         );
       }
     },

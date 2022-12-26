@@ -6,34 +6,41 @@ import { setPage } from '../../redux/slices/paginationSlice';
 export const Pagination = () => {
   const dispatch = useDispatch();
   const page = useSelector((state) => state.pagination.page);
+  const category = useSelector((state) => state.filter.category);
   const pages = [1, 2, 3];
 
   return (
-    <div className={styles.root}>
-      <button
-        className={styles.btn}
-        onClick={() => dispatch(setPage(page === 1 ? 3 : page - 1))}
-      >
-        {'<'}
-      </button>
-      {pages.map((value, id) => {
-        return (
+    <>
+      {category === 0 ? (
+        <div className={styles.root}>
           <button
-            key={id}
-            className={page === value ? styles.btn_active : styles.btn}
-            onClick={() => dispatch(setPage(value))}
+            className={styles.btn}
+            onClick={() => dispatch(setPage(page === 1 ? 3 : page - 1))}
           >
-            {value}
+            {'<'}
           </button>
-        );
-      })}
+          {pages.map((value, id) => {
+            return (
+              <button
+                key={id}
+                className={page === value ? styles.btn_active : styles.btn}
+                onClick={() => dispatch(setPage(value))}
+              >
+                {value}
+              </button>
+            );
+          })}
 
-      <button
-        className={styles.btn}
-        onClick={() => dispatch(setPage(page === 3 ? 1 : page + 1))}
-      >
-        {'>'}
-      </button>
-    </div>
+          <button
+            className={styles.btn}
+            onClick={() => dispatch(setPage(page === 3 ? 1 : page + 1))}
+          >
+            {'>'}
+          </button>
+        </div>
+      ) : (
+        ''
+      )}
+    </>
   );
 };
