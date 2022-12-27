@@ -68,7 +68,6 @@ export const cartSlice = createSlice({
         findItem.count--;
         state.totalPizzas = state.totalPizzas - 1;
       } else {
-        console.log('x');
         state.totalPizzas = state.totalPizzas - action.payload.count;
         state.totalPrice = state.totalPrice - action.payload.price;
         state.massiveOfPizzas = state.massiveOfPizzas.filter(
